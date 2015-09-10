@@ -1,5 +1,6 @@
 package net.stickycode.bootstrap;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.ServiceLoader;
 
@@ -30,9 +31,49 @@ public interface StickyBootstrap {
     return bootstrap;
   }
 
+  /**
+   * Scan the given packages for components
+   *
+   * @return this bootstrap builder style
+   */
   StickyBootstrap scan(String... packages);
 
+  /**
+   * Resolve the dependencies of the given object
+   *
+   * @return this bootstrap builder style
+   */
   StickyBootstrap inject(Object value);
 
-  public <T> T find(Class<T> type);
+  /**
+   * Find an instance of the give type, it MAY result in a new instance depending on its scoping.
+   */
+  <T> T find(Class<T> type)
+      throws BeanNotFoundFailure;
+
+  /**
+   * @return true if a component of this type can be found
+   */
+  boolean canFind(Class<?> type);
+
+  /**
+   * useful for framework integrations where you need access to the Spring
+   * context or Guice Injector
+   *
+   * @return the underlying implementation of the bootstrap,
+   */
+  Object getImplementation();
+
+  void registerSingleton(String beanName, Object bean, Class<?> type);
+
+  void registerType(String beanName, Class<?> type);
+
+  void shutdown();
+
+  StickyBootstrap scan(Collection<String> packageFilters);
+
+  /**
+   * Useful to extend the scanning, could be a Guice module or a Spring Resource to scan for example
+   */
+  void extend(Object extension);
 }
