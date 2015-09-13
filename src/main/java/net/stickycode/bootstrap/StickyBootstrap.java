@@ -76,4 +76,6 @@ public interface StickyBootstrap {
    * Useful to extend the scanning, could be a Guice module or a Spring Resource to scan for example
    */
   void extend(Object extension);
+
+  void start();
 }
