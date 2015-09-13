@@ -6,4 +6,6 @@ public interface ComponentContainer {
 
   <T> T find(Class<T> type);
 
+  boolean canFind(Class<?> type);
+
 }
