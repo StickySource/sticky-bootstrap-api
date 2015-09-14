@@ -57,7 +57,7 @@
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>clirr-maven-plugin</artifactId>
 				<configuration>
-					<comparisonVersion>[3.2]</comparisonVersion>
+					<comparisonVersion>[3.3]</comparisonVersion>
 				</configuration>
 			</plugin>
 		</plugins>
