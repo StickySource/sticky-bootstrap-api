@@ -4,6 +4,8 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.ServiceLoader;
 
+import javax.inject.Provider;
+
 public interface StickyBootstrap {
 
   static StickyBootstrap crank(Object target, String... packages) {
@@ -78,4 +80,6 @@ public interface StickyBootstrap {
   void extend(Object extension);
 
   void start();
+
+  void registerProvider(String name, Provider<Object> provider, Class<?> type);
 }
